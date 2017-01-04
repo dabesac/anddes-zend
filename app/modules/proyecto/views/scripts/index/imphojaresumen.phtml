@@ -503,7 +503,6 @@
 
 
 <?php 
-
     $html = ob_get_contents();
     $mpdf=new mPDF('win-1252','A4','','',15,15,30,12,5,7);
     $mpdf->SetHTMLHeader($header);
@@ -511,6 +510,4 @@
     ob_end_clean();
     $mpdf -> WriteHTML($html);
     $mpdf->Output('Hoja de Resumen  -'. $this->transmitta['transmittaid'].'.pdf','D');
- 
-
 ?>

@@ -3154,4 +3154,107 @@ public function semanagerentegeneralAction(){
          }
     }
 
+    public function imprimirtareoAction(){
+
+        try {
+
+        $this->_helper->layout()->disableLayout();
+        $fecha_inicio = $this->_getParam('fecha');
+        $fecha_inicio_mod = date("Y-m-d", strtotime($fecha_inicio));
+        $fecha_inicio = date("d-m-Y", strtotime($fecha_inicio));
+        $fecha_mostrar = date("d", strtotime($fecha_inicio));
+
+        $this->view->fecha = $fecha_inicio;
+        $this->view->fecha_mostrar = $fecha_mostrar;
+        $uid = $this->sesion->uid;
+        $dni = $this->sesion->dni;
+        $this->view->fecha_inicio_mod = $fecha_inicio_mod;
+        $this->view->uid = $uid;
+        $this->view->dni = $dni;
+        $categoriaid=$this->sesion->personal->ucatid;
+        $areaid=$this->sesion->personal->ucatareaid;
+        $cargo=$this->sesion->personal->ucatcargo;
+        $this->view->aprobacion = $this->sesion->personal->ucataprobacion;
+        $this->view->cargo=$cargo;
+        $this->view->areaid=$areaid;
+        $tareo_persona = new Admin_Model_DbTable_Tareopersona();
+        $semana=date('W', strtotime($fecha_inicio_mod)); 
+        $this->view->semana = $semana;
+        $datos_tareopersona=$tareo_persona->_getTareoxPersonaxSemana($uid,$dni,$semana);
+        $datos_tareopersona_NB=$tareo_persona->_getTareoxPersonaxSemanaxNB($uid,$dni,$semana);
+        $wheres_hojatiempo_empleado=array('uid'=>$uid,'dni'=>$dni,'semanaid'=>$semana);
+        $estado_hojatiempo=$tareo_persona->_getEstado_HojaTiempo($semana,$uid,$dni);
+        //print_r($wheres_hojatiempo_empleado);
+        if ($estado_hojatiempo)
+        {
+            $this->view->estado_hoja_tiempo= $estado_hojatiempo;    
+           
+        }
+        //print_r($estado_hojatiempo);
+
+        //$data_tareo = $tareo->_getTareoXUid($where);
+        $this->view->actividades= $datos_tareopersona;
+        // print_r($this->sesion->is_gerente);
+        $this->view->is_gerente=$this->sesion->is_gerente;
+        
+        $this->view->actividades_NB = $datos_tareopersona_NB;
+
+        $buscar_aprobador=$this->sesion->personal->ucataprobacion;
+        $aprobacion = new Admin_Model_DbTable_Aprobacion();
+        
+        $wheres_filtro1=array('idaprobacion'=>$buscar_aprobador,'estado_filtro1'=>'A');
+        $list_aprobacion_filtro1=$aprobacion->_getOnefiltro1($wheres_filtro1); 
+        if ($list_aprobacion_filtro1)
+        {
+            $aprobador_filtro1= $list_aprobacion_filtro1['idaprobador_filtro1'];  
+        }
+
+        $wheres_filtro2=array('idaprobacion'=>$buscar_aprobador,'estado_filtro2'=>'A');
+        $list_aprobacion_filtro2=$aprobacion->_getOnefiltro2($wheres_filtro2); 
+
+        if ($list_aprobacion_filtro2)
+        {
+            $idaprobador_filtro2= $list_aprobacion_filtro2['idaprobador_filtro2'];  
+            $usuario_cat = new Admin_Model_DbTable_Usuariocategoria();
+            
+            $wheres_ucat=array('aprobacion'=>$idaprobador_filtro2,'estado'=>'A');
+            $list_aprobador=$usuario_cat->_getAprobadorxEmpleado($wheres_ucat);  
+
+
+            
+            if ($list_aprobador)
+            {
+                $aprobador_usuario = explode(".", $list_aprobador['uid']);
+                $this->view->aprobador_filtro2=ucwords($aprobador_usuario[0])." ".ucwords($aprobador_usuario[1]);
+            }
+        }
+
+        $planificacion = new Admin_Model_DbTable_Planificacion();
+        $proyectos=$planificacion->_getOnexSemanaxGerenteProyecto($semana,$uid,$dni,$areaid);
+        $k=0;
+        $gerentes_proyectos=array();
+        
+        foreach ($proyectos as $datos) {
+          $porciones = explode(".", $datos['uid']);
+          $gerentes_proyectos[$k]=ucwords($porciones[0])." ".ucwords($porciones[1]);
+          $k++;
+        }
+        $this->view->gerentes_proyectos=$gerentes_proyectos;
+
+        } catch (Exception $e) {
+            print "Error: ".$e->getMessage();
+        } 
+
+        // $semana = $this->_getParam('semanaid');
+        // $uid = $this->_getParam('uid');
+        // $dni = $this->_getParam('dni');
+        // $tareo_persona = new Admin_Model_DbTable_Tareopersona(); 
+        // $datos_tareopersona=$tareo_persona->_getTareoxPersonaxSemanaimrprmir($uid,$dni,$semana); 
+
+        // $this->view->tareo= $datos_tareopersona;  
+
+        //print_r($datos_tareopersona);
+        //exit();
+    }
+
 };

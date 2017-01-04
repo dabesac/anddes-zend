@@ -104,78 +104,53 @@
         <a data-toggle="tab" href="#configurar">Configurar
          <i class="fa fa-home"></i>
         </a>
-      </li>
-   
+      </li>   
       <li class="">
         <a data-toggle="tab" href="#control">Control</a>
       </li>
-
       <li class="">
         <a data-toggle="tab" href="#monitoreo">Monitoreo</a>
       </li>
-
       <li class="">
         <a data-toggle="tab" href="#planeamiento">Planeamiento</a>
       </li>
-
       <li class="">
         <a data-toggle="tab" href="#finanzas">Finanzas</a>
       </li>
-
       <li class="">
         <a data-toggle="tab" href="#indicadores">Indicadores</a>
-      </li>
-   
-   
+      </li>   
     </ul>
   </header>
-
-
   <div class="panel-body">
     <div class="tab-content">
       <div id="configurar" class="tab-pane active ">
         <a id="hojaresumen" class="btn btn-success btn-xs" href="/proyecto/index/hojaresumen/codigo_prop_proy/<?php echo $this->codigoproyecto ?>/proyectoid/<?php echo $this->proyectoid ?>/propuestaid/<?php echo $this->propuestaid ?>/revision/<?php echo $this->revision ?>">Hoja de Resumen</a>
         <a id="save" class="btn btn-success btn-xs" href="#">Otros</a>
-      </div>
- 
+      </div> 
       <div id="control" class="tab-pane  ">
-        <a id="save" class="btn btn-success btn-xs" href="#">Performance</a>
-        <a id="save" class="btn btn-success btn-xs" href="#">Curva S</a>
-        
+        <a id="save" class="btn btn-success btn-xs" href="/control">control Performance</a>
+        <a id="save" class="btn btn-success btn-xs" href="#">Curva S</a>        
         <a id="listaentregables" class="btn btn-success btn-xs" href="/control/control/listaentregables/codigo_prop_proy/<?php echo $this->codigoproyecto ?>/proyectoid/<?php echo $this->proyectoid ?>/revision/<?php echo $this->revision?> ">Lista de Entregables</a>
-
-
         <a id="save" class="btn btn-success btn-xs" href="#">Otros</a>        
       </div>
 
       <div id="monitoreo" class="tab-pane  ">
         <a id="save" class="btn btn-success btn-xs" href="#">Ordenes de Cambio</a>
-        <a id="save" class="btn btn-success btn-xs" href="#">Lecciones Aprendidas</a>
-    
+        <a id="save" class="btn btn-success btn-xs" href="#">Lecciones Aprendidas</a>    
       </div>
-
-      <div id="planeamiento" class="tab-pane  ">
-      
+      <div id="planeamiento" class="tab-pane  ">      
       </div>
-
       <div id="finanzas" class="tab-pane  ">
         <a id="save" class="btn btn-success btn-xs" href="#">Valorizacion</a>
         <a id="save" class="btn btn-success btn-xs" href="#">Orden de Facturacion</a>
-      </div>
-   
+      </div>   
       <div id="indicadores" class="tab-pane  ">
         <a id="save" class="btn btn-success btn-xs" href="#">Cost Flow HH</a>
         <a id="save" class="btn btn-success btn-xs" href="#">Cost Flow Total</a>
       </div>
-
     </div>
-
-
 </section>
-
-
-
-<!--  -->
 
     <section class="panel">
       <?php
@@ -193,194 +168,190 @@
           <li class="">
             <a data-toggle="tab" href="#gastos" aria-expanded="false">Gastos</a>
           </li>
-          <li class="">
-            <a data-toggle="tab" href="#laboratorio" aria-expanded="false">Laboratorio</a>
-          </li>
-          <li class="">
+       
+       <!--    <li class="">
             <a data-toggle="tab" href="#rates" aria-expanded="false">Rates</a>
+          </li> -->
+          <li class="">
+            <a data-toggle="tab" href="#equipo">Equipo</a>
           </li>
-        </ul>
-
-          
-
-
-
-
-
-
-
-
+        </ul> 
       </header>
       <div class="panel-body">
-        <div class="tab-content">
-          <div id="resumen" class="tab-pane active">
-            <div class="panel-body">
-              <?php
-                $actividadpadre= new Admin_Model_DbTable_Actividad();
-                $list=$actividadpadre->_getActividadesPadresxReplicon($this->proyecto['proyectoid'],$this->proyecto['codigo_prop_proy'],$this->proyecto['propuestaid'],$this->proyecto['revision']);
-              ?>
-       <!--        <table class="table table-hover p-table">
-                <thead>
-                  <tr>
-                    <th style="width: 10%;">Id</th>
-                    <th style="width: 70%;">Nombre Actividad</th>
-                    <th style="width: 10;">Duracion</th>
-                    <th style="width: 10%;">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($list as $lista) { ?>
-                  <tr>
-                    <td><?php print_r($lista['actividadid']); ?></td>
-                    <td><?php print_r($lista['nombre']); ?></td>
-                    <td><?php print_r($lista['h_propuesta']);?></td>
-                    <td></td>
-                  </tr>
-                  <?php }?>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div id="gastos" class="tab-pane">
-            <div class="panel-body">
-            </div>
-          </div>
-          <div id="laboratorio" class="tab-pane">
-            <div class="panel-body">
-              laboratorio
-            </div>
-          </div>
-          <div id="rates" class="tab-pane">
-            <!--llamar al modulo control de proyecto angular -->
-    
-             <!-- --> 
-        <!--  </div>
-        </div>
-      </div>
-    </section>
-  </div> -->
+          <div class="tab-content">
+            <div id="resumen" class="tab-pane active">
+              <div class="panel-body">
+                <?php
+                  $actividadpadre= new Admin_Model_DbTable_Actividad();
+                  $list=$actividadpadre->_getActividadesPadresxReplicon($this->proyecto['proyectoid'],$this->proyecto['codigo_prop_proy'],$this->proyecto['propuestaid'],$this->proyecto['revision']);
+                ?>
 
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-
-                        <?php 
-                        $actividadpadre= new Admin_Model_DbTable_Actividad();
-                        $listactpadre=$actividadpadre->_getActividadesPadresxOrden($this->proyecto['proyectoid'],$this->proyecto['codigo_prop_proy'],$this->proyecto['propuestaid'],$this->proyecto['revision']);
-
-                        foreach ($listactpadre as $actividad_padre ) {
-                          
-                        ?>
-  <div class="panel panel-primary" >
-    <div class="panel-heading" role="tab" id="<?php print_r($actividad_padre['actividadid']); ?>" >
-      <h4 class="panel-title" style="color: #fff;">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo"hijos_";print_r($actividad_padre['actividadid']); ?>" aria-expanded="false" aria-controls="<?php echo"hijos_";print_r($actividad_padre['actividadid']); ?>">
-          <?php 
-                print_r($actividad_padre['nombre']); 
-          ?>
-        </a>
-        <span class="pull-right">
-          <?php
-            if($actividad_padre['estado_mostrar']=='A' )
-                              {
-                                 // print_r(strlen($activar['actividadid']));
-                                 ?>
-                                  <input id="agrega_<?php print_r($actividad_padre['actividadid'])?><?php ?>" type="checkbox"  checked="checked" name="agrega[<?php print_r($actividad_padre['actividadid'])?>]" value="<?php print_r($actividad_padre['actividadid']) ?>">
-
+                    <?php foreach ($list as $lista) { ?>
+                    <tr>
+                      <td><?php print_r($lista['actividadid']); ?></td>
+                      <td><?php print_r($lista['nombre']); ?></td>
+                      <td><?php print_r($lista['h_propuesta']);?></td>
+                      <td></td>
+                    </tr>
+                    <?php }?>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+                      <?php 
+                      $actividadpadre= new Admin_Model_DbTable_Actividad();
+                      $listactpadre=$actividadpadre->_getActividadesPadresxOrden($this->proyecto['proyectoid'],$this->proyecto['codigo_prop_proy'],$this->proyecto['propuestaid'],$this->proyecto['revision']);
+                      foreach ($listactpadre as $actividad_padre ) {                          
+                      ?>
+                        <div class="panel panel-primary" >
+                          <div class="panel-heading" role="tab" id="<?php print_r($actividad_padre['actividadid']); ?>" >
+                            <h4 class="panel-title" style="color: #fff;">
+                              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo"hijos_";print_r($actividad_padre['actividadid']); ?>" aria-expanded="false" aria-controls="<?php echo"hijos_";print_r($actividad_padre['actividadid']); ?>">
                                 <?php 
-                              }
-                              else
-                              { ?>
-
-                                <input id="agrega_<?php print_r($actividad_padre['actividadid'])?><?php ?>" type="checkbox"  name="agrega[<?php print_r($actividad_padre['actividadid'])?>]" value="<?php print_r($actividad_padre['actividadid']) ?>">
-
+                                      print_r($actividad_padre['nombre']); 
+                                ?>
+                              </a>
+                              <span class="pull-right">
                                 <?php
-                              }
-?>
-        
-        </span>
+                                  if($actividad_padre['estado_mostrar']=='A' )
+                                    {
+                                    // print_r(strlen($activar['actividadid']));
+                                    ?>
+                                    <input id="agrega_<?php print_r($actividad_padre['actividadid'])?><?php ?>" type="checkbox"  checked="checked" name="agrega[<?php print_r($actividad_padre['actividadid'])?>]" value="<?php print_r($actividad_padre['actividadid']) ?>">
 
-      </h4>
-
-    </div>
-
-       <script type="text/javascript">
-                                $("#agrega_<?php print_r($actividad_padre['actividadid'])?>").click(function(){
-                                
-                                if($("#agrega_<?php print_r($actividad_padre['actividadid'])?>").is(':checked')) {
-                                    estado='A';
-                                    console.log('act');
-                                } else {
-                                    estado='I';
-                                    console.log('desact');
-                                }
-                                
-                        
-                                var proyectoid="<?php print_r($this->proyecto['proyectoid']) ?>";
-                                var codigo_prop_proy="<?php print_r($this->proyecto['codigo_prop_proy']) ?>";
-                                var revision="<?php print_r($this->proyecto['revision']) ?>";
-                                var actividad_padre="<?php print_r($actividad_padre['actividadid']) ?>";
-                                var codigo_actividad="<?php print_r($actividad_padre['codigo_actividad']) ?>";
-                                
-                                url="/proyecto/index/estadomostraractividad/proyectoid/"+proyectoid+"/codigo_prop_proy/"+ codigo_prop_proy+"/revision/"+revision+"/actividad_padre/"+actividad_padre+"/codigo_actividad/"+codigo_actividad+"/estadomostrar/"+estado;
-                                
-
-
-                                //$("#cargact").load(url);
-
-                                $.ajax({
-                                    type: "POST",
-                                    url: url,
-                                    data: $(this).serialize(),
-                                    dataType: "html",
-                                    // error: function(){
-                                    //   alert("error petición ajax load");
-                                    // },
-                                    success: function(data){
+                                    <?php 
                                     }
-                               });
-                           });
+                                    else
+                                    { ?>
+                                    <input id="agrega_<?php print_r($actividad_padre['actividadid'])?><?php ?>" type="checkbox"  name="agrega[<?php print_r($actividad_padre['actividadid'])?>]" value="<?php print_r($actividad_padre['actividadid']) ?>">
+                                    <?php
+                                    }
+                                    ?>        
+                              </span>
+                            </h4>
+                          </div>
+
+                         <script type="text/javascript">
+                            $("#agrega_<?php print_r($actividad_padre['actividadid'])?>").click(function(){                                  
+                            if($("#agrega_<?php print_r($actividad_padre['actividadid'])?>").is(':checked')) {
+                             estado='A';
+                              console.log('act');
+                            } else {
+                            estado='I';
+                            console.log('desact');
+                            }             
+                            var proyectoid="<?php print_r($this->proyecto['proyectoid']) ?>";
+                            var codigo_prop_proy="<?php print_r($this->proyecto['codigo_prop_proy']) ?>";
+                            var revision="<?php print_r($this->proyecto['revision']) ?>";
+                            var actividad_padre="<?php print_r($actividad_padre['actividadid']) ?>";
+                            var codigo_actividad="<?php print_r($actividad_padre['codigo_actividad']) ?>";
+                                                    
+                            url="/proyecto/index/estadomostraractividad/proyectoid/"+proyectoid+"/codigo_prop_proy/"+ codigo_prop_proy+"/revision/"+revision+"/actividad_padre/"+actividad_padre+"/codigo_actividad/"+codigo_actividad+"/estadomostrar/"+estado;
+                                                    
+                            //$("#cargact").load(url);
+                            $.ajax({
+                              type: "POST",
+                              url: url,
+                              data: $(this).serialize(),
+                              dataType: "html",
+                              // error: function(){
+                              //   alert("error petición ajax load");
+                            // },
+                              success: function(data){
+                              }
+                            });
+                            });
                           </script>
 
+                          <div id="<?php echo"hijos_";print_r($actividad_padre['actividadid']); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<?php print_r($actividad_padre['actividadid']); ?>">
+                            <div class="panel-body">
+                              <ul class="list-group">
+                                <?php 
+                                $listacthijas=$actividadpadre->_getActividadesHijasxOrden($this->proyecto['proyectoid'],$this->proyecto['codigo_prop_proy'],$this->proyecto['propuestaid'],$this->proyecto['revision'],$actividad_padre['actividadid']);
 
-    <div id="<?php echo"hijos_";print_r($actividad_padre['actividadid']); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="<?php print_r($actividad_padre['actividadid']); ?>">
-      <div class="panel-body">
-          <ul class="list-group">
-        <?php 
-        $listacthijas=$actividadpadre->_getActividadesHijasxOrden($this->proyecto['proyectoid'],$this->proyecto['codigo_prop_proy'],$this->proyecto['propuestaid'],$this->proyecto['revision'],$actividad_padre['actividadid']);
-
-                        foreach ($listacthijas as $actividad_hijas ) {?>
-                          
-
-  <li class="list-group-item"><?php 
-
-  print_r($actividad_hijas['nombre']); ?></li>
-
-
-
-
-                          <?php
-                        }
-        ?>
-        </ul>
-      </div>
-    </div>
-  </div>
-<?php }?>
-</div>
+                                  foreach ($listacthijas as $actividad_hijas ) {?>     
+                                  <li class="list-group-item"><?php 
+                                  print_r($actividad_hijas['nombre']); ?>            
+                                  </li>
+                                <?php } ?>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      <?php }?>
                     </div>
-                </div>
+              </div>
+            </div>
             <div id="gastos" class="tab-pane">
                 <div class="panel-body">
                 </div>
             </div>
             <div id="laboratorio" class="tab-pane">
-                <div class="panel-body">
-                    laboratorio
-                </div>
+              <div class="panel-body">
+                  laboratorio
+              </div>
             </div>
             <div id="rates" class="tab-pane">
-                <!--llamar al modulo control de proyecto angular -->    <!-- --> 
+
+              <div class="panel-body">
+                rates 
+              </div>
             </div>
-                    </div>
+            <div id="equipo" class="tab-pane">  
+
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="panel panel-default">                  
+                          <div class="panel-body">
+                          <?php //print_r($this->equipototal) ?>
+                          <table  style="font-size: 12px;center" class="table table-bordered">
+                            <head>
+                            <th>#</th>
+                            <th>DNI</th>
+                            <th>Uid</th>
+                            <th>Cargo</th>
+                            <th>Cateogria</th>
+                            <th>Rate</th>
+                            <th>Nivel</th>
+                            <th>Total de Horas</th>
+                            </head>
+                            <tbody>
+                                 <?php $i=1;
+                                    foreach ($this->equipototal as $value)
+                                    {
+                                    ?>
+                                      <tr>
+                                        <td><?php echo $i;?></td>
+                                        <td><?php echo $value['dni'];?></td>
+                                        <td><?php echo $value['uid'];?></td>
+                                        <td><?php echo $value['cargo'];?></td>
+                                        <td><?php echo $value['categoriaid'];?></td>
+                                        <td><?php echo $value['rate_proyecto'];?></td>
+                                        <td><?php echo $value['nivel'];?></td>
+                                        <td><?php $bdequipo = new Admin_Model_DbTable_Equipo();
+                                              $total=$bdequipo->_getTareoxProyectoxhoras($value['proyectoid'],$value['uid']);
+                                              //print_r($total);
+                                              echo $total[0]['sum'];
+                                         ?></td>
+                                       
+                                      </tr>                                       
+                                    <?php 
+                                    $i++;
+                                    }
+                                    ?>
+                            </tbody>
+                          </table>
+
+                              <ul class="list-unstyled" data-bind="foreach: labors">
+                                  <li>                                 
+                                    <strong><span data-bind="text: uid"></span></strong>
+                                    <small><a href="#" data-bind="click: $parent.getLaborDetail">Details</a></small>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div> 
+              </div>
+
+            </div>
+          </div>
       </div>
     </section>
   </div>
@@ -770,9 +741,7 @@
                       $("#modaltimes_rate").load(url);
                     });
                   });
-                </script>
-
-                <script type="text/javascript">
+            
                   $(document).ready(function(){
                     $("#asigna_<?php echo $i?>").click(function(){
                       var proyectoid = $(this).attr('proyectoid');
@@ -788,9 +757,6 @@
                     });
                   });
                 </script>
-
-
-
               <?php $i++;
                 }
               }
@@ -1134,3 +1100,8 @@ $(".modal-body #DNI").val( myDNI );
 });
 
 </script>
+
+<script type='text/javascript' src='/js/knockout/dist/knockout.js'></script>
+<script type='text/javascript' src='/js/apps.js'></script>
+
+

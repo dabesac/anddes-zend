@@ -586,5 +586,20 @@ public function _getDatosxEquipoxProyecto($uid,$dni,$codigo_prop_proy,$proyectoi
 
     }
 
+    public function _getTareoxProyectoxhoras($proyectoid,$uid)
+     {
+        try{
+            $sql=$this->_db->query("
+                select sum(cast((case when h_real='' or h_real is null then '0' else h_real end) as double precision)) from tareo_persona where proyectoid='$proyectoid' and uid='$uid'
+            ");
+            $row=$sql->fetchAll();
+            return $row;
+            }
+
+           catch (Exception $ex){
+            print $ex->getMessage();
+        }
+    }
+
 
 }

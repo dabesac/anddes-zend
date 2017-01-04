@@ -1,0 +1,21 @@
+{
+  "name": "my-project-name",
+  "description": "",
+  "main": "",
+  "authors": [
+    "walter jesus <wjesus88@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "^3.4.1"
+  }
+}

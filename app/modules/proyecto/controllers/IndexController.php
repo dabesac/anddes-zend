@@ -1384,8 +1384,7 @@ public function verAction() {
       'proyectoid'    => $proyectoid,
     );
     $edit = $editproyect->_getOne($where);
-    $this->view->proyecto = $edit;
-   /// print_r($edit);
+    $this->view->proyecto = $edit; 
 
     $codigo=$this->_getParam('codigo_prop_proy');
     $propuestaid=$edit['propuestaid'];
@@ -1393,11 +1392,17 @@ public function verAction() {
     $buscapropuesta = new Admin_Model_DbTable_Propuesta();
     $busca=$buscapropuesta->_getPropuestaxIndices($codigo,$propuestaid,$revision);
     $this->view->buscapropuesta = $busca; 
-
-
     $areacat=new Admin_Model_DbTable_Area();
     $arcat=$areacat->_getAreaxProyecto();
     $this->view->area = $arcat;  
+
+    $data['proyectoid'] = $proyectoid;   
+    $data['estado'] = 'A';   
+    $orders=array('uid asc');
+    $bdequipo = new Admin_Model_DbTable_Equipo();
+    $equipo=$bdequipo->_getFilter($data,$attrib=null,$orders);
+    $this->view->equipototal = $equipo;  
+    
 }   
 
 
@@ -3607,7 +3612,6 @@ public function cargartarea2Action() {
 
  public function updatehojaresumenAction()
  {
-
      $codigo_prop_proy= $this->_getParam("codigo_prop_proy");    
      $proyectoid= $this->_getParam("proyectoid");
      $revision_propuesta= $this->_getParam("revision_propuesta");
@@ -3639,32 +3643,24 @@ public function cargartarea2Action() {
      $anexo= $this->_getParam("anexo");
      $telefono= $this->_getParam("telefono");
      $puesto_trabajo= $this->_getParam("puesto_trabajo");
-     $contactoid= $this->_getParam("contactoid");
-
-    
+     $contactoid= $this->_getParam("contactoid");    
     $pk = array('codigo_prop_proy' => $codigo_prop_proy,'proyectoid' => $proyectoid,'revision_hojaresumen' => $revision_hojaresumen,'propuestaid' => $propuestaid,
           'revision_propuesta' => $revision_propuesta, );
-
     $wherehoja = array(
      'gerente_proyecto' => $gerente_proyecto,'jefe_proyecto1' => $jefe_proyecto1,'jefe_proyecto2' => $jefe_proyecto2,'control_documentario' => $control_documentario,
      'fecha_inicio_planificado' => $fecha_inicio_planificado,'fecha_fin_planificado' => $fecha_fin_planificado,'fecha_inicio_real' => $fecha_inicio_real,'fecha_fin_real' => $fecha_fin_real,
      'adelanto' => $adelanto, 'comentarios' => $comentario, 'tipo_contrato' => $tipo_contrato, 
      'observacion' => $observacion,
     );
-
     // 'ruc' => $ruc,
     $str = array('contactoid' => $contactoid,);
     $wherecontacto = array('direccion' => $direccion,'correo' => $correo,
      'numero1' => $numero1,'numero2' => $numero2,'anexo' => $anexo,'telefono' => $telefono,'puesto_trabajo' => $puesto_trabajo, );
-
- // 'nombre_comercial' => $nombre_comercial,
-    
+ // 'nombre_comercial' => $nombre_comercial,    
     $uphoja= new Admin_Model_DbTable_Hojaresumen(); 
     $uhoja=$uphoja->_update($wherehoja,$pk);
                     //_update($data,$pk)
-
     //print_r($uhoja);
-
     if($uhoja)
     { 
       $updcontac=new Admin_Model_DbTable_Contacto();
@@ -3682,11 +3678,8 @@ public function cargartarea2Action() {
         alert("bbbbb--bbbb");
       </script>
     <?php
-
     }
-
     exit();
-
  }
 
 public function verproyectoAction() {
@@ -3710,15 +3703,13 @@ public function verproyectoAction() {
     );
     $edit = $editproyect->_getOne($where);
     $this->view->proyecto = $edit;
-   /// print_r($edit);
 
-    $codigo=$this->_getParam('codigo_prop_proy');
-    $propuestaid=$edit['propuestaid'];
-    $revision=$edit['revision'];
-    $buscapropuesta = new Admin_Model_DbTable_Propuesta();
-    $busca=$buscapropuesta->_getPropuestaxIndices($codigo,$propuestaid,$revision);
-    $this->view->buscapropuesta = $busca; 
-
+    // $codigo=$this->_getParam('codigo_prop_proy');
+    // $propuestaid=$edit['propuestaid'];
+    // $revision=$edit['revision'];
+    // $buscapropuesta = new Admin_Model_DbTable_Propuesta();
+    // $busca=$buscapropuesta->_getPropuestaxIndices($codigo,$propuestaid,$revision);
+    // $this->view->buscapropuesta = $busca; 
 
     $areacat=new Admin_Model_DbTable_Area();
     $arcat=$areacat->_getAreaxProyecto();
@@ -3727,8 +3718,7 @@ public function verproyectoAction() {
 
 public function estadomostraractividadAction(){
     try
-    {  
-      
+    {        
       $proyectoid= $this->_getParam("proyectoid");
       $codigo_prop_proy= $this->_getParam("codigo_prop_proy");
       $revision= $this->_getParam("revision");
@@ -3737,11 +3727,10 @@ public function estadomostraractividadAction(){
       $estado= $this->_getParam("estadomostrar");
 
       $pk=array('revision'=>$revision,'codigo_prop_proy'=>$codigo_prop_proy,'codigo_actividad'=>$codigo_actividad,'proyectoid'=>$proyectoid,'actividad_padre'=>$actividad_padre);
-      $act= new Admin_Model_DbTable_Actividad();
-      
+      $act= new Admin_Model_DbTable_Actividad();     
 
               $str_padre="codigo_prop_proy='$codigo_prop_proy' and proyectoid='$proyectoid' and revision='$revision' and codigo_actividad='$codigo_actividad' and actividadid='$actividad_padre'";      
-              $str_hijas="codigo_prop_proy='$codigo_prop_proy' and proyectoid='$proyectoid' and revision='$revision' and  actividad_padre='$actividad_padre'";      
+              $str_hijas="codigo_prop_proy='$codigo_prop_proy' and proyectoid='$proyectoid' and revision='$revision' and  actividad_padre='$actividad_padre'";    
 
       //$data = array('estado_mostrar' =>$estado);
        $data["estado_mostrar"]=$estado;
@@ -3765,21 +3754,35 @@ public function estadomostraractividadAction(){
           }
           else{
             echo "no existe";
-          }
-      
-
-      
-      
-          //$upactiv= $act->_update($datact,$wheres);
-
-        
-
+          }              
+          //$upactiv= $act->_update($datact,$wheres);    
      } 
       catch (Exception $e) {
       print "Error: ".$e->getMessage();
     }
-
   } 
 
+  public function equipoxproyectoAction() {
+      $data['proyectoid'] = '1101.10.10';   
+      $orders=array('uid asc');
+      $bdequipo = new Admin_Model_DbTable_Equipo();
+      $equipo=$bdequipo->_getFilter($data,$attrib=null,$orders);
+
+      // $bdequipoarea = new Admin_Model_DbTable_Equipoarea();
+      // $area=$bdequipoarea->_buscarAreasxProyecto('14.10.134-1101.10.09-D','1101.10.09');
+      // $i=0;
+      // foreach ($area as $verarea) {
+      //   $bdequipo = new Admin_Model_DbTable_Equipo();
+      //   $equipo=$bdequipo->_buscarEquipoxProyectoxArea('14.10.134-1101.10.09-D','1101.10.09',$verarea['areaid']);
+
+      //   $ek[] = array('name' =>$verarea['nombre'],'area'=>$verarea['areaid'] ,'items'=> $equipo);
+      //   $i++;
+      // }    
+
+      //es el formato de renderiar :  [{"bbb":"1","name":"2","items":[{"nombre":"books"}]}]
+      //$arr = array(['bbb' =>'1', 'name' => '2','items'=>  array(['nombre' =>'books'])]);
+      $this->_helper->json->sendJson($equipo);  
+
+  }
 
 }

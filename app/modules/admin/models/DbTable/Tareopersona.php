@@ -122,6 +122,33 @@ order by t.proyectoid,t.actividadid,t.tipo_actividad desc
         }
     }
 
+    public function _getTareoxPersonaxSemanaimrprmir($uid,$dni,$semanaid)
+     {
+        try{
+            $sql=$this->_db->query("
+
+                select *,tareo.estado as estado_tareopersona,act.nombre as nombre_actividad   from tareo_persona as tareo
+
+                inner join actividad as act
+                on tareo.actividadid=act.actividadid and tareo.codigo_actividad=act.codigo_actividad
+                    and tareo.codigo_prop_proy=act.codigo_prop_proy
+                    and tareo.revision=act.revision
+                inner join proyecto as pro on tareo.codigo_prop_proy=pro.codigo_prop_proy
+                     and tareo.proyectoid=pro.proyectoid
+                where tareo.uid='$uid' and tareo.dni='$dni' and tareo.semanaid='$semanaid'
+                and tareo.etapa!='INICIO%'  order by act.propuestaid desc,tareo.proyectoid,tareo.actividadid,tipo_actividad desc
+            ");
+            $row=$sql->fetchAll();
+            return $row;
+            }
+
+           catch (Exception $ex){
+            print $ex->getMessage();
+        }
+    }
+
+
+
     public function _getTareoxPersonaxSemanaxActividadid($uid,$dni,$semanaid,$actividad_padre,$actividadid,$codigo_actividad,$codigo_prop_proy,$proyectoid,$revision)
      {
         try{
